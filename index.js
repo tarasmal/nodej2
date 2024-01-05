@@ -1,1 +1,24 @@
-import requestHandler from "./router.js";
+import http from "http";
+import Router from "./classes/Router/Router.js";
+
+const router = new Router();
+
+router.get("/example", (req, res, payload) => {
+  console.log(payload);
+  res.writeHead(200, { "Content-Type": "text/plain" });
+  res.end("GET request to /example");
+});
+
+router.post("/example/:id", async (req, res, payload) => {
+  console.log(payload);
+  res.writeHead(200, { "Content-Type": "application/json" });
+  res.end(JSON.stringify({ message: "POST request to /example", payload }));
+});
+console.log(router);
+
+const server = http.createServer((req, res) => router.handleRequest(req, res));
+
+const PORT = 3001;
+server.listen(PORT, () =>
+  console.log(`Server is running on http://localhost:${PORT}`),
+);
