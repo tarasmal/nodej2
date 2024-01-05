@@ -49,11 +49,7 @@ class Router {
   }
 
   _parseQueryParameters(url) {
-    const queryParams = {};
-    url.searchParams.forEach((value, key) => {
-      queryParams[key] = value;
-    });
-    return queryParams;
+    return url.searchParams;
   }
 
   _matchPath(urlPath, routePath) {
