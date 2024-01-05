@@ -19,7 +19,7 @@ class Router {
     this.addRoute("POST", path, handler);
   }
   put(path, handler) {
-    this.addRoute("POST", path, handler);
+    this.addRoute("PUT", path, handler);
   }
 
   async handleRequest(req, res) {
