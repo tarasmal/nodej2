@@ -1,5 +1,7 @@
 import http from "http";
 import Router from "./classes/Router/Router.js";
+import process from 'node:process';
+import gracefulShutdown from "./utils/gracefulShutdown.js";
 
 const router = new Router();
 
@@ -31,6 +33,12 @@ console.log(router);
 const server = http.createServer((req, res) => router.handleRequest(req, res));
 
 const PORT = 3001;
+
 server.listen(PORT, () =>
   console.log(`Server is running on http://localhost:${PORT}`),
 );
+process.on('SIGINT',  () => {
+  gracefulShutdown(server);
+});
+
+
